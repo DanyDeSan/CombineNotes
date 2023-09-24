@@ -7,13 +7,16 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 // MARK: VotViewModel
 final class VoteViewModel: ObservableObject {
     
-    @Published var catInfoModel: CatInfoModel?
+    @Published var breedModel: BreedModel?
+    @Published var catImage: Image = Image("lunita_test", bundle: nil)
     private var apiDataManager: VoteViewAPIDataManager
     private var cancellables = Set<AnyCancellable>()
+    private var currentImageCatReference: String?
     
     init(apiDataManager: VoteViewAPIDataManager) {
         self.apiDataManager = apiDataManager
@@ -23,11 +26,54 @@ final class VoteViewModel: ObservableObject {
         apiDataManager.fetchCatInfo()
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                print(completion)
-            } receiveValue: { value in
-                print(value)
+            .sink { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .finished:
+                    guard let currentImageCatReference = self.currentImageCatReference else { return }
+                    self.fetchCatImage(fromURL: currentImageCatReference)
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { [weak self] value in
+                guard let breed = value.breeds?.first else { return }
+                self?.breedModel = breed
+                self?.currentImageCatReference = value.url
             }.store(in: &cancellables)
     }
     
+    func removeKey() {
+        debugPrint("Attempting to reset the key")
+        apiDataManager.resetKey()
+            .ignoreOutput()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("Reseted Key :)")
+                case .failure(_):
+                    print("Something failed while trying to reset Key")
+                }
+            } receiveValue: { _ in }
+            .store(in: &cancellables)
+
+    }
+    
+    // MARK: Private methods
+    
+    private func fetchCatImage(fromURL url: String) {
+        guard let publisher = apiDataManager.fetchCatImage(from: url) else { return }
+        publisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    debugPrint("Succesfully fetched image")
+                case .failure(let error):
+                    debugPrint("Failed to obtain image", error)
+                }
+            } receiveValue: { [weak self] image in
+                guard let image = image else { return }
+                self?.catImage = Image(uiImage: image)
+            }.store(in: &cancellables)
+    }
 }

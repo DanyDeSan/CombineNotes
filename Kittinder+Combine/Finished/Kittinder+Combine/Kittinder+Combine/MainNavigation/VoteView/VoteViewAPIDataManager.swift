@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 final class VoteViewAPIDataManager {
     
@@ -45,54 +46,66 @@ final class VoteViewAPIDataManager {
         guard let url = urlComponents.url else { return  nil }
         var urlRequest = URLRequest(url: url)
         urlRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        debugPrint(urlRequest.url)
         return urlRequest.url
     }
     
-//    func fetchCatInfo() -> AnyPublisher<CatInfoModel, VoteViewAPIDataManagerError> {
-//        return keychainManager
-//            .fetchKey()
-//            .mapError({ _ in
-//                return URLError(.init(rawValue: 1))
-//            })
-//            .flatMap { key -> URLSession.DataTaskPublisher in
-//                let url = self.createURLRequest(withAPIKey: key)!
-//                let publisher = self.urlSession.dataTaskPublisher(for: url)
-//                return publisher
-//            }
-//            .map { data,_ in
-//                return data
-//            }
-//            .decode(type: CatInfoModel.self, decoder: JSONDecoder())
-//            .mapError { _ in
-//                return VoteViewAPIDataManagerError.genericError
-//                
-//            }
-//            .eraseToAnyPublisher()
-//        
-//    }
+
     
     func fetchCatInfo() -> AnyPublisher<CatInfoModel,VoteViewAPIDataManagerError> {
         return keychainManager
             .fetchKey()
             .tryMap({ key -> URL in
+                debugPrint(key)
                 guard let url = self.createURLRequest(withAPIKey: key) else { throw VoteViewAPIDataManagerError.genericError }
                 return url
             })
             .mapError { keyChainError in
+                debugPrint(keyChainError)
                 return VoteViewAPIDataManagerError(keyChainError: keyChainError as? KeyChainManager.KeyChainError ?? .genericError)
             }
             .flatMap { url -> AnyPublisher<CatInfoModel,VoteViewAPIDataManagerError> in
                 self.urlSession.dataTaskPublisher(for: url)
                     .map(\.data)
                     .mapError({ error in
+                        debugPrint(error)
                         return VoteViewAPIDataManagerError.genericError
                     })
-                    .decode(type: CatInfoModel.self, decoder: JSONDecoder())
+                    .decode(type: [CatInfoModel].self, decoder: JSONDecoder())
+                    .map({ dataResult in
+                        return dataResult[0]
+                    })
                     .mapError({ error in
+                        debugPrint(error)
                         return VoteViewAPIDataManagerError.genericError
                     })
                     .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+    }
+    
+    func resetKey() -> AnyPublisher<Void,KeyChainManager.KeyChainError> {
+        keychainManager.removeKey()
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchCatImage(from url: String) -> AnyPublisher<UIImage?,VoteViewAPIDataManagerError>? {
+        guard let url = URL(string: url) else { return nil }
+        return urlSession.dataTaskPublisher(for: url)
+            .subscribe(on: DispatchQueue.global())
+            .map { response -> UIImage? in
+                return UIImage(data: response.data)
+            }
+            .mapError { error -> VoteViewAPIDataManagerError in
+                switch error.errorCode {
+                case (400...500):
+                    return .validationError
+                case (500...600):
+                    return .serverError
+                default:
+                    return .genericError
+                }
+            }.eraseToAnyPublisher()
+            
     }
 }
