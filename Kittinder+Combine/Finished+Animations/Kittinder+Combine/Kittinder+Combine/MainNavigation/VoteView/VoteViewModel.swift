@@ -18,6 +18,7 @@ final class VoteViewModel: ObservableObject {
     @Published var catImage: Image = Image("lunita_test", bundle: nil)
     @Published var shouldShowError: Bool = false
     @Published var shouldShowVoteError: Bool = false
+    @Published var shouldShowLoader: Bool = false
     private var apiDataManager: VoteViewAPIDataManager
     private var cancellables = Set<AnyCancellable>()
     private var currentImageCatReference: String?
@@ -29,6 +30,7 @@ final class VoteViewModel: ObservableObject {
     }
     
     func fetchData() {
+        shouldShowLoader = true
         apiDataManager.fetchCatInfo()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
@@ -38,6 +40,7 @@ final class VoteViewModel: ObservableObject {
                     guard let currentImageCatReference = self.currentImageCatReference else { return }
                     self.fetchCatImage(fromURL: currentImageCatReference)
                 case .failure:
+                    shouldShowLoader = false
                     self.shouldShowError = true
                 }
             } receiveValue: { [weak self] value in
@@ -67,6 +70,7 @@ final class VoteViewModel: ObservableObject {
     }
     
     func sendVote(isCute: Bool) {
+        shouldShowLoader = true
         guard !isSendingVote,
               let currentCatID = currentCatID else { return }
         let voteType = isCute ? VoteType.cute : VoteType.notCute
@@ -79,6 +83,7 @@ final class VoteViewModel: ObservableObject {
                     print("finished")
                     self.fetchData()
                 case .failure:
+                    shouldShowLoader = false
                     self.shouldShowVoteError = true
                 }
             } receiveValue: { wasSent in
@@ -94,6 +99,7 @@ final class VoteViewModel: ObservableObject {
         publisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
+                self?.shouldShowLoader = false
                 switch completion {
                 case .finished:
                     debugPrint("Succesfully fetched image")
