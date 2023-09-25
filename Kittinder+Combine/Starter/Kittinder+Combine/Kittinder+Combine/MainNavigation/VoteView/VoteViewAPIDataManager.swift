@@ -7,40 +7,88 @@
 
 import Foundation
 import Combine
+import UIKit
 
 // MARK: - VoteViewAPIDataManager
 final class VoteViewAPIDataManager {
     
-    // MARK: - VoteViewAPIDataManagerError
+    // MARK: VoteViewAPIDataManagerError
     enum VoteViewAPIDataManagerError: Error {
-        
-        init(keyChainError: KeyChainManager.KeyChainError) {
-            self = .keyError
-        }
-        
         case keyError
         case genericError
         case validationError
         case serverError
     }
     
-    // MARK: Private attributers
+    // MARK: VoteType
+    enum VoteType: Int {
+        case cute  = 1
+        case notCute = -1
+    }
+    
+    // MARK: Private Methods
     private let url = "api.thecatapi.com"
     private let urlSession = URLSession.shared
     private let keychainManager : KeyChainManager
     
-    // MARK: init
+    // MARK: Init
     init(keychainManager: KeyChainManager) {
         self.keychainManager = keychainManager
     }
     
-    // MARK: private methods
-    private func createURLRequest(withAPIKey key: String) -> URL? {
-        return nil
+    // MARK: Public Methods
+    func fetchCatInfo() -> AnyPublisher<CatInfoModel,VoteViewAPIDataManagerError> {
+        Empty().eraseToAnyPublisher()
     }
     
-    // MARK: public methods
-    func fetchCatInfo() -> AnyPublisher<CatInfoModel,VoteViewAPIDataManagerError> {
-        return Empty().eraseToAnyPublisher()
+    func resetKey() -> AnyPublisher<Void,KeyChainManager.KeyChainError> {
+        Empty().eraseToAnyPublisher()
     }
+    
+    func fetchCatImage(from url: String) -> AnyPublisher<UIImage?,VoteViewAPIDataManagerError>? {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func sendVote(_ voteType: VoteType, catID: String) -> AnyPublisher<Bool,VoteViewAPIDataManagerError> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    
+    // MARK: Private methods
+    private func createFetchURL(withAPIKey key: String) -> URLRequest? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = url
+        urlComponents.path = "/v1/images/search"
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "has_breeds", value: "1"),
+            URLQueryItem(name: "api_key", value: key)
+        ]
+        urlComponents.queryItems = queryItems
+        guard let url = urlComponents.url else { return  nil }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        return urlRequest
+    }
+    
+    private func createVoteURL(withAPIKey key: String, parameters: (catID: String, vote: VoteType)) throws -> URLRequest? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = url
+        urlComponents.path = "/v1/votes"
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "api_key", value: key)
+        ]
+        urlComponents.queryItems = queryItems
+        let voteModel = VoteModel(imageID: parameters.catID, subID: "110595", value: parameters.vote.rawValue)
+        let jsonEncoder = JSONEncoder()
+        let encodedVote = try jsonEncoder.encode(voteModel)
+        guard let url = urlComponents.url else { return nil }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = encodedVote
+        return urlRequest
+    }
+    
 }

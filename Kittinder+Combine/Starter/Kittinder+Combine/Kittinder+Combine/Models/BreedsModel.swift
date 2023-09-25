@@ -7,10 +7,8 @@
 
 import Foundation
 
-// MARK: - BreedModel
 struct BreedModel: Codable {
     
-    // MARK: attributes
     let id, name: String
     let vetstreetURL: String
     let temperament, origin, countryCodes, countryCode: String
@@ -26,7 +24,6 @@ struct BreedModel: Codable {
     let hypoallergenic: Int
     let referenceImageID: String
 
-    // MARK: CodingKeys
     enum CodingKeys: String, CodingKey {
         case id, name
         case vetstreetURL = "vetstreet_url"

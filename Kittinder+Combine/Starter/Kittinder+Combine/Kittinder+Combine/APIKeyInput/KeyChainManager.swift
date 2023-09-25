@@ -26,15 +26,15 @@ final class KeyChainManager {
    
     // MARK: public methods
     func storeKey(_ apiKey: String) -> AnyPublisher<Void,KeyChainError> {
-        return Empty().eraseToAnyPublisher()
+        Empty().eraseToAnyPublisher()
     }
     
     func fetchKey() -> AnyPublisher<String, KeyChainError> {
-        return Fail(error: KeyChainError.genericError).eraseToAnyPublisher()
+        Empty().eraseToAnyPublisher()
     }
     
     func removeKey() -> AnyPublisher<Void,KeyChainError> {
-        return Empty().eraseToAnyPublisher()
+        Empty().eraseToAnyPublisher()
     }
     
     

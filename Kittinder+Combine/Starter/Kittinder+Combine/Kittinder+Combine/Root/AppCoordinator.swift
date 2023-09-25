@@ -17,23 +17,12 @@ final class AppCoordinator {
     private var isUserRegister: Bool = false
     private var cancellables = Set<AnyCancellable>()
     
-    // MARK: Init
     init(keyManager: KeyChainManager) {
         self.keyManager = keyManager
         bind()
     }
     
-    // MARK: Public Methods
     func bind() {
-        keyManager
-            .fetchKey()
-            .ignoreOutput()
-            .sink { [weak self] completion in
-                if completion == .finished {
-                    self?.isUserRegister = true
-                }
-            } receiveValue: { _ in }
-            .store(in: &cancellables)
         
     }
     
@@ -45,14 +34,15 @@ final class AppCoordinator {
             buildAPIKeyInput()
         }
     }
+    
 
+    
     func buildMainModule() -> some View {
         let coordinator = MainNavigationCoordinator(navigationPath: NavigationPath())
         let mainView = MainView(coordinator: coordinator)
         return mainView
     }
     
-    // MARK: Private Methods
     private func buildAPIKeyInput() -> some View {
         let viewModel = APIKeyInputViewModel(
             coordinator: self,

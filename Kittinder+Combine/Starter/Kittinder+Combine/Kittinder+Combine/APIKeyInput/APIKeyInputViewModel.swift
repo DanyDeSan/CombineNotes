@@ -20,7 +20,7 @@ final class APIKeyInputViewModel: ObservableObject {
     // MARK: Private attributes
     private var coordinator: AppCoordinator?
     private let keyChainManager: KeyChainManager
-
+    private var cancellables = Set<AnyCancellable>()
     
     
     // MARK: Init
@@ -36,7 +36,6 @@ final class APIKeyInputViewModel: ObservableObject {
     
     // MARK: Public methods
     func didTapOnSaveAPIKey() {
-
 
     }
 

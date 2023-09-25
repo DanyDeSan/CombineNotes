@@ -7,14 +7,10 @@
 
 import Foundation
 
-// MARK: - VodeModel
 struct VoteModel: Codable {
-    
-    // MARK: Attributes
     let imageID, subID: String
     let value: Int
 
-    // MARK: Coding Keys
     enum CodingKeys: String, CodingKey {
         case imageID = "image_id"
         case subID = "sub_id"

@@ -7,9 +7,7 @@
 
 import Foundation
 
-// MARK: - CatInfoModel
 struct CatInfoModel: Codable {
-    // MARK: Attributes
     let breeds: [BreedModel]?
     let id: String
     let url: String

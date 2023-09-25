@@ -7,25 +7,43 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
-// MARK: - VoteViewModel
+// MARK: VotViewModel
 final class VoteViewModel: ObservableObject {
     
-    // MARK: published attributes
-    @Published var catInfoModel: CatInfoModel?
+    typealias VoteType = VoteViewAPIDataManager.VoteType
     
-    // MARK: private attributes
+    @Published var breedModel: BreedModel?
+    @Published var catImage: Image = Image("lunita_test", bundle: nil)
+    @Published var shouldShowError: Bool = false
+    @Published var shouldShowVoteError: Bool = false
     private var apiDataManager: VoteViewAPIDataManager
     private var cancellables = Set<AnyCancellable>()
+    private var currentImageCatReference: String?
+    private var currentCatID: String?
+    private var isSendingVote: Bool = false
     
-    // MARK: init
     init(apiDataManager: VoteViewAPIDataManager) {
         self.apiDataManager = apiDataManager
     }
     
-    // MARK: public methods
     func fetchData() {
 
     }
     
+    func removeKey() {
+
+        
+    }
+    
+    func sendVote(isCute: Bool) {
+
+    }
+    
+    // MARK: Private methods
+    
+    private func fetchCatImage(fromURL url: String) {
+
+    }
 }

@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-// MARK: - APIKeyInputView
 struct APIKeyInputView: View {
-    // MARK: Observed attributes
     @ObservedObject var viewModel: APIKeyInputViewModel
-    
-    // MARK: Body
+    @State var input: String = ""
     var body: some View {
         VStack {
             Text("Kittinder")
@@ -26,7 +23,7 @@ struct APIKeyInputView: View {
                 .padding()
             Spacer()
             Button(role: nil, action: {
-                
+                viewModel.didTapOnSaveAPIKey()
             }, label: {
                 Text("Continue")
                     .frame(maxWidth: .infinity)
