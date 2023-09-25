@@ -16,6 +16,8 @@ final class VoteViewModel: ObservableObject {
     
     @Published var breedModel: BreedModel?
     @Published var catImage: Image = Image("lunita_test", bundle: nil)
+    @Published var shouldShowError: Bool = false
+    @Published var shouldShowVoteError: Bool = false
     private var apiDataManager: VoteViewAPIDataManager
     private var cancellables = Set<AnyCancellable>()
     private var currentImageCatReference: String?
@@ -36,8 +38,8 @@ final class VoteViewModel: ObservableObject {
                 case .finished:
                     guard let currentImageCatReference = self.currentImageCatReference else { return }
                     self.fetchCatImage(fromURL: currentImageCatReference)
-                case .failure(let error):
-                    print(error)
+                case .failure(let _):
+                    self.shouldShowError = true
                 }
             } receiveValue: { [weak self] value in
                 guard let breed = value.breeds?.first else { return }
@@ -75,14 +77,12 @@ final class VoteViewModel: ObservableObject {
                     print("finished")
                     self.fetchData()
                 case .failure(let error):
-                    print(error)
+                    self.shouldShowVoteError = true
                 }
             } receiveValue: { wasSent in
                 print(wasSent)
             }
             .store(in: &cancellables)
-
-        
     }
     
     // MARK: Private methods

@@ -11,6 +11,7 @@ struct VoteView: View {
     
     
     @ObservedObject var viewModel: VoteViewModel
+    @State var lastVoteEmitted: Bool = false
     
     var body: some View {
         ZStack {
@@ -70,6 +71,7 @@ struct VoteView: View {
                     .highPriorityGesture( TapGesture().onEnded({ _ in
                         print("Tap Gesture")
                         viewModel.sendVote(isCute: true)
+                        lastVoteEmitted = true
                     }) )
                     .simultaneousGesture(LongPressGesture(minimumDuration: 4).onEnded({ _ in
                         viewModel.removeKey()
@@ -80,6 +82,7 @@ struct VoteView: View {
                     .cornerRadius(10)
                     Button(role: nil, action: {
                         viewModel.sendVote(isCute: false)
+                        lastVoteEmitted = false
                     }, label: {
                         Text("Not Cute")
                             .frame(maxWidth: .infinity)
@@ -98,6 +101,16 @@ struct VoteView: View {
         .onAppear(perform: {
             viewModel.fetchData()
         })
+        .alert("Something went wrong fetching the cat 😿", isPresented: $viewModel.shouldShowError) {
+            Button("Try Again") {
+                viewModel.fetchData()
+            }
+        }
+        .alert("Your vote could not be sent 😿", isPresented: $viewModel.shouldShowVoteError) {
+            Button("Try Again") {
+                viewModel.sendVote(isCute: lastVoteEmitted)
+            }
+        }
     }
 }
 
