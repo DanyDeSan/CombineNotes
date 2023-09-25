@@ -9,7 +9,6 @@ import SwiftUI
 
 struct VoteView: View {
     
-    
     @ObservedObject var viewModel: VoteViewModel
     @State var lastVoteEmitted: Bool = false
     
@@ -76,10 +75,11 @@ struct VoteView: View {
                     .simultaneousGesture(LongPressGesture(minimumDuration: 4).onEnded({ _ in
                         viewModel.removeKey()
                     }))
-                    .background(Color.green)
+                    .background(CuteButton())
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .cornerRadius(10)
+                    .kerning(0.5)
                     Button(role: nil, action: {
                         viewModel.sendVote(isCute: false)
                         lastVoteEmitted = false
@@ -88,7 +88,7 @@ struct VoteView: View {
                             .frame(maxWidth: .infinity)
                             .padding()
                     })
-                    .background(Color.red)
+                    .background(NotCuteButton())
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .cornerRadius(10)
@@ -97,6 +97,10 @@ struct VoteView: View {
             }
             .padding()
             .blur(radius: 0)
+            
+            if viewModel.shouldShowLoader {
+                LoadingView()
+            }
         }
         .onAppear(perform: {
             viewModel.fetchData()
@@ -117,5 +121,50 @@ struct VoteView: View {
 struct VoteView_Previews: PreviewProvider {
     static var previews: some View {
         VoteView(viewModel: VoteViewModel(apiDataManager: VoteViewAPIDataManager(keychainManager: KeyChainManager())))
+    }
+}
+
+struct LoadingView: View {
+    var body: some View {
+        ZStack {
+            Color(.systemBackground)
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .red))
+                .scaleEffect(3.0) // CGsize
+        }
+    }
+}
+
+struct CuteButton : View {
+    @State private var colorChange = false
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [
+            colorChange ? .green : .blue,
+            colorChange ? .yellow : .green
+        ]), startPoint: .leading, endPoint: .trailing)
+        .onReceive(timer) { time in
+            withAnimation(.easeInOut) {
+                self.colorChange.toggle()
+            }}
+    }
+}
+
+struct NotCuteButton : View {
+    @State private var colorChange = false
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [
+            colorChange ? .red : .orange,
+            colorChange ? .yellow : .red
+        ]), startPoint: .leading, endPoint: .trailing)
+        .onReceive(timer) { time in
+            withAnimation(.easeInOut) {
+                self.colorChange.toggle()
+            }}
     }
 }

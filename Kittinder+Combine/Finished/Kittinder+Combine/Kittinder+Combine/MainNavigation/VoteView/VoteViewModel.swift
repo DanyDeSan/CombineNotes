@@ -18,6 +18,7 @@ final class VoteViewModel: ObservableObject {
     @Published var catImage: Image = Image("lunita_test", bundle: nil)
     @Published var shouldShowError: Bool = false
     @Published var shouldShowVoteError: Bool = false
+    @Published var shouldShowLoader: Bool = false
     private var apiDataManager: VoteViewAPIDataManager
     private var cancellables = Set<AnyCancellable>()
     private var currentImageCatReference: String?
@@ -29,7 +30,7 @@ final class VoteViewModel: ObservableObject {
     }
     
     func fetchData() {
-        // showLoader = true
+        shouldShowLoader = true
         apiDataManager.fetchCatInfo()
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
@@ -40,7 +41,7 @@ final class VoteViewModel: ObservableObject {
                     guard let currentImageCatReference = self.currentImageCatReference else { return }
                     self.fetchCatImage(fromURL: currentImageCatReference)
                 case .failure:
-                    // showLoader = false
+                    shouldShowLoader = false
                     self.shouldShowError = true
                 }
             } receiveValue: { [weak self] value in
@@ -60,17 +61,18 @@ final class VoteViewModel: ObservableObject {
                 case .finished:
                     print("Reseted Key :)")
                 case .failure(_):
+                    // isloader = false
                     print("Something failed while trying to reset Key")
                 }
             } receiveValue: { _ in }
             .store(in: &cancellables)
-
+        
     }
     
     func sendVote(isCute: Bool) {
-        // showLoader = true
+        shouldShowLoader = true
         guard !isSendingVote,
-        let currentCatID = currentCatID else { return }
+              let currentCatID = currentCatID else { return }
         var voteType = isCute ? VoteType.cute : VoteType.notCute
         apiDataManager.sendVote(voteType, catID: currentCatID)
             .sink { [weak self] completion in
@@ -80,7 +82,7 @@ final class VoteViewModel: ObservableObject {
                     print("finished")
                     self.fetchData()
                 case .failure:
-                    // showLoader = false
+                    shouldShowLoader = false
                     self.shouldShowVoteError = true
                 }
             } receiveValue: { wasSent in
@@ -95,13 +97,13 @@ final class VoteViewModel: ObservableObject {
         guard let publisher = apiDataManager.fetchCatImage(from: url) else { return }
         publisher
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                // showloader = false
+            .sink { [weak self] completion in
+                self?.shouldShowLoader = false
                 switch completion {
                 case .finished:
                     debugPrint("Succesfully fetched image")
                 case .failure:
-                    self.catImage = Image("lunita_test", bundle: nil)
+                    self?.catImage = Image("lunita_test", bundle: nil)
                 }
             } receiveValue: { [weak self] image in
                 guard let image = image else { return }
