@@ -29,6 +29,7 @@ final class VoteViewModel: ObservableObject {
     }
     
     func fetchData() {
+        // showLoader = true
         apiDataManager.fetchCatInfo()
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
@@ -38,7 +39,8 @@ final class VoteViewModel: ObservableObject {
                 case .finished:
                     guard let currentImageCatReference = self.currentImageCatReference else { return }
                     self.fetchCatImage(fromURL: currentImageCatReference)
-                case .failure(let _):
+                case .failure:
+                    // showLoader = false
                     self.shouldShowError = true
                 }
             } receiveValue: { [weak self] value in
@@ -66,6 +68,7 @@ final class VoteViewModel: ObservableObject {
     }
     
     func sendVote(isCute: Bool) {
+        // showLoader = true
         guard !isSendingVote,
         let currentCatID = currentCatID else { return }
         var voteType = isCute ? VoteType.cute : VoteType.notCute
@@ -76,7 +79,8 @@ final class VoteViewModel: ObservableObject {
                 case .finished:
                     print("finished")
                     self.fetchData()
-                case .failure(let error):
+                case .failure:
+                    // showLoader = false
                     self.shouldShowVoteError = true
                 }
             } receiveValue: { wasSent in
@@ -92,11 +96,12 @@ final class VoteViewModel: ObservableObject {
         publisher
             .receive(on: DispatchQueue.main)
             .sink { completion in
+                // showloader = false
                 switch completion {
                 case .finished:
                     debugPrint("Succesfully fetched image")
-                case .failure(let error):
-                    debugPrint("Failed to obtain image", error)
+                case .failure:
+                    self.catImage = Image("lunita_test", bundle: nil)
                 }
             } receiveValue: { [weak self] image in
                 guard let image = image else { return }
