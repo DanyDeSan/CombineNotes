@@ -24,6 +24,11 @@ final class VoteViewAPIDataManager {
         case serverError
     }
     
+    enum VoteType: Int {
+        case cute  = 1
+        case notCute = -1
+    }
+    
     private let url = "api.thecatapi.com"
     private let urlSession = URLSession.shared
     private let keychainManager : KeyChainManager
@@ -33,7 +38,7 @@ final class VoteViewAPIDataManager {
         self.keychainManager = keychainManager
     }
     
-    private func createURLRequest(withAPIKey key: String) -> URL? {
+    private func createFetchURL(withAPIKey key: String) -> URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = url
@@ -50,6 +55,26 @@ final class VoteViewAPIDataManager {
         return urlRequest.url
     }
     
+    private func createVoteURL(withAPIKey key: String, parameters: (catID: String, vote: VoteType)) throws -> URLRequest? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = url
+        urlComponents.path = "/v1/votes"
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "api_key", value: key)
+        ]
+        urlComponents.queryItems = queryItems
+        let voteModel = VoteModel(imageID: parameters.catID, subID: "110595", value: parameters.vote.rawValue)
+        let jsonEncoder = JSONEncoder()
+        let encodedVote = try jsonEncoder.encode(voteModel)
+        guard let url = urlComponents.url else { return nil }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = encodedVote
+        return urlRequest
+    }
+    
 
     
     func fetchCatInfo() -> AnyPublisher<CatInfoModel,VoteViewAPIDataManagerError> {
@@ -57,7 +82,7 @@ final class VoteViewAPIDataManager {
             .fetchKey()
             .tryMap({ key -> URL in
                 debugPrint(key)
-                guard let url = self.createURLRequest(withAPIKey: key) else { throw VoteViewAPIDataManagerError.genericError }
+                guard let url = self.createFetchURL(withAPIKey: key) else { throw VoteViewAPIDataManagerError.genericError }
                 return url
             })
             .mapError { keyChainError in
@@ -107,5 +132,41 @@ final class VoteViewAPIDataManager {
                 }
             }.eraseToAnyPublisher()
             
+    }
+    
+    func sendVote(_ voteType: VoteType, catID: String) -> AnyPublisher<Bool,VoteViewAPIDataManagerError> {
+        return keychainManager
+            .fetchKey()
+            .tryMap({ key -> URLRequest in
+                guard let url = try? self.createVoteURL(withAPIKey: key, parameters: (catID: catID, vote: voteType)) else { throw VoteViewAPIDataManagerError.genericError }
+                return url
+            })
+            .mapError { keyChainError in
+                debugPrint(keyChainError)
+                return VoteViewAPIDataManagerError(keyChainError: keyChainError as? KeyChainManager.KeyChainError ?? .genericError)
+            }
+            .flatMap { urlRequest -> AnyPublisher<Bool,VoteViewAPIDataManagerError> in
+                self.urlSession.dataTaskPublisher(for: urlRequest)
+                    .map({ _, response in
+                        guard let response = response as? HTTPURLResponse else { return false }
+                        guard  response.statusCode == 200 || response.statusCode == 201 else {
+                            return false
+                        }
+                        return true
+                        
+                    })
+                    .mapError({ error -> VoteViewAPIDataManagerError in
+                        switch error.errorCode {
+                        case (400...500):
+                            return .validationError
+                        case (500...600):
+                            return .serverError
+                        default:
+                            return .genericError
+                        }
+                    })
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
 }

@@ -69,6 +69,7 @@ struct VoteView: View {
                     })
                     .highPriorityGesture( TapGesture().onEnded({ _ in
                         print("Tap Gesture")
+                        viewModel.sendVote(isCute: true)
                     }) )
                     .simultaneousGesture(LongPressGesture(minimumDuration: 4).onEnded({ _ in
                         viewModel.removeKey()
@@ -78,7 +79,7 @@ struct VoteView: View {
                     .frame(maxWidth: .infinity)
                     .cornerRadius(10)
                     Button(role: nil, action: {
-                        
+                        viewModel.sendVote(isCute: false)
                     }, label: {
                         Text("Not Cute")
                             .frame(maxWidth: .infinity)
