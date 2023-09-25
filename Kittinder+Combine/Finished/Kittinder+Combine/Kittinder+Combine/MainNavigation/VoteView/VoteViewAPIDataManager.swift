@@ -40,6 +40,7 @@ final class VoteViewAPIDataManager {
     func fetchCatInfo() -> AnyPublisher<CatInfoModel,VoteViewAPIDataManagerError> {
         return keychainManager
             .fetchKey() // Publisher<String,KeyChaingError>
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .tryMap({ key -> URLRequest in  // Publisher<URLRequest,KeyChainError>
                 guard let url = self.createFetchURL(withAPIKey: key) else { throw VoteViewAPIDataManagerError.genericError }
                 return url
@@ -80,7 +81,7 @@ final class VoteViewAPIDataManager {
     func fetchCatImage(from url: String) -> AnyPublisher<UIImage?,VoteViewAPIDataManagerError>? {
         guard let url = URL(string: url) else { return nil }
         return urlSession.dataTaskPublisher(for: url)
-            .subscribe(on: DispatchQueue.global())
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .map { response -> UIImage? in
                 return UIImage(data: response.data)
             }
@@ -100,6 +101,7 @@ final class VoteViewAPIDataManager {
     func sendVote(_ voteType: VoteType, catID: String) -> AnyPublisher<Bool,VoteViewAPIDataManagerError> {
         return keychainManager
             .fetchKey()
+            .subscribe(on: DispatchQueue.global(qos: .userInitiated))
             .tryMap({ key -> URLRequest in
                 guard let url = try? self.createVoteURL(
                     withAPIKey: key,

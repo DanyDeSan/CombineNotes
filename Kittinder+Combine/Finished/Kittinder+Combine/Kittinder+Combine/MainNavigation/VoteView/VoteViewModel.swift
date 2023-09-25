@@ -32,7 +32,6 @@ final class VoteViewModel: ObservableObject {
     func fetchData() {
         shouldShowLoader = true
         apiDataManager.fetchCatInfo()
-            .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -56,6 +55,7 @@ final class VoteViewModel: ObservableObject {
         debugPrint("Attempting to reset the key")
         apiDataManager.resetKey()
             .ignoreOutput()
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -73,8 +73,9 @@ final class VoteViewModel: ObservableObject {
         shouldShowLoader = true
         guard !isSendingVote,
               let currentCatID = currentCatID else { return }
-        var voteType = isCute ? VoteType.cute : VoteType.notCute
+        let voteType = isCute ? VoteType.cute : VoteType.notCute
         apiDataManager.sendVote(voteType, catID: currentCatID)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
                 switch completion {
