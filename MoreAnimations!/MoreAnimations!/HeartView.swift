@@ -17,18 +17,22 @@ struct HearView: View {
         ZStack {
             Circle()
                 .frame(width: 200, height: 200) .foregroundColor(circleColorChanged ? Color(.systemGray5) : .red)
-                .animation(.default, value: circleColorChanged)
+                //.animation(.default, value: circleColorChanged)
             
             Image(systemName: "heart.fill")
                 .foregroundColor(heartColorChanged ? .red : .white)
                 .font(.system(size: 100))
                 .scaleEffect(heartSizeChanged ? 1.0 : 0.5)
-                .animation(.default, value: heartSizeChanged)
+                //.animation(.default, value: heartSizeChanged)
         }
+        //.animation(.default, value: circleColorChanged)
+        //.animation(.spring(response: 0.3, dampingFraction: 0.3, blendDuration: 0.3), value: circleColorChanged)
         .onTapGesture {
-            self.circleColorChanged.toggle()
-            self.heartColorChanged.toggle()
-            self.heartSizeChanged.toggle()
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.3, blendDuration: 0.3)) {
+                self.circleColorChanged.toggle()
+                self.heartColorChanged.toggle()
+                self.heartSizeChanged.toggle()
+            }
         }
     }
 }
