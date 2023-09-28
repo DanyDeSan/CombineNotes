@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1ACCFC8D2AC4CD5B00AC3E64 /* Animations_Workshop_vol_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACCFC8C2AC4CD5B00AC3E64 /* Animations_Workshop_vol_2App.swift */; };
+		1ACCFC8F2AC4CD5B00AC3E64 /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACCFC8E2AC4CD5B00AC3E64 /* Parallax.swift */; };
+		1ACCFC912AC4CD5D00AC3E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACCFC902AC4CD5D00AC3E64 /* Assets.xcassets */; };
+		1ACCFC952AC4CD5D00AC3E64 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACCFC942AC4CD5D00AC3E64 /* Preview Assets.xcassets */; };
+		1ACCFC9C2AC4CDBE00AC3E64 /* LikeALaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACCFC9B2AC4CDBE00AC3E64 /* LikeALaunchScreen.swift */; };
+		1ACCFC9E2AC506E700AC3E64 /* Mooli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1ACCFC9D2AC506E700AC3E64 /* Mooli-Regular.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1ACCFC892AC4CD5B00AC3E64 /* Animations_Workshop vol.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Animations_Workshop vol.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1ACCFC8C2AC4CD5B00AC3E64 /* Animations_Workshop_vol_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations_Workshop_vol_2App.swift; sourceTree = "<group>"; };
+		1ACCFC8E2AC4CD5B00AC3E64 /* Parallax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parallax.swift; sourceTree = "<group>"; };
+		1ACCFC902AC4CD5D00AC3E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1ACCFC922AC4CD5D00AC3E64 /* Animations_Workshop_vol_2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Animations_Workshop_vol_2.entitlements; sourceTree = "<group>"; };
+		1ACCFC942AC4CD5D00AC3E64 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1ACCFC9B2AC4CDBE00AC3E64 /* LikeALaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeALaunchScreen.swift; sourceTree = "<group>"; };
+		1ACCFC9D2AC506E700AC3E64 /* Mooli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mooli-Regular.ttf"; sourceTree = "<group>"; };
+		1ACCFC9F2AC5074400AC3E64 /* Animations-Workshop-vol-2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Animations-Workshop-vol-2-Info.plist"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1ACCFC862AC4CD5B00AC3E64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1ACCFC802AC4CD5B00AC3E64 = {
+			isa = PBXGroup;
+			children = (
+				1ACCFC8B2AC4CD5B00AC3E64 /* Animations_Workshop vol.2 */,
+				1ACCFC8A2AC4CD5B00AC3E64 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1ACCFC8A2AC4CD5B00AC3E64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1ACCFC892AC4CD5B00AC3E64 /* Animations_Workshop vol.2.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1ACCFC8B2AC4CD5B00AC3E64 /* Animations_Workshop vol.2 */ = {
+			isa = PBXGroup;
+			children = (
+				1ACCFC9F2AC5074400AC3E64 /* Animations-Workshop-vol-2-Info.plist */,
+				1ACCFC8C2AC4CD5B00AC3E64 /* Animations_Workshop_vol_2App.swift */,
+				1ACCFC8E2AC4CD5B00AC3E64 /* Parallax.swift */,
+				1ACCFC902AC4CD5D00AC3E64 /* Assets.xcassets */,
+				1ACCFC9D2AC506E700AC3E64 /* Mooli-Regular.ttf */,
+				1ACCFC922AC4CD5D00AC3E64 /* Animations_Workshop_vol_2.entitlements */,
+				1ACCFC932AC4CD5D00AC3E64 /* Preview Content */,
+				1ACCFC9B2AC4CDBE00AC3E64 /* LikeALaunchScreen.swift */,
+			);
+			path = "Animations_Workshop vol.2";
+			sourceTree = "<group>";
+		};
+		1ACCFC932AC4CD5D00AC3E64 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1ACCFC942AC4CD5D00AC3E64 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1ACCFC882AC4CD5B00AC3E64 /* Animations_Workshop vol.2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1ACCFC982AC4CD5D00AC3E64 /* Build configuration list for PBXNativeTarget "Animations_Workshop vol.2" */;
+			buildPhases = (
+				1ACCFC852AC4CD5B00AC3E64 /* Sources */,
+				1ACCFC862AC4CD5B00AC3E64 /* Frameworks */,
+				1ACCFC872AC4CD5B00AC3E64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Animations_Workshop vol.2";
+			productName = "Animations_Workshop vol.2";
+			productReference = 1ACCFC892AC4CD5B00AC3E64 /* Animations_Workshop vol.2.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1ACCFC812AC4CD5B00AC3E64 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					1ACCFC882AC4CD5B00AC3E64 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 1ACCFC842AC4CD5B00AC3E64 /* Build configuration list for PBXProject "Animations_Workshop vol.2" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1ACCFC802AC4CD5B00AC3E64;
+			productRefGroup = 1ACCFC8A2AC4CD5B00AC3E64 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1ACCFC882AC4CD5B00AC3E64 /* Animations_Workshop vol.2 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1ACCFC872AC4CD5B00AC3E64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1ACCFC9E2AC506E700AC3E64 /* Mooli-Regular.ttf in Resources */,
+				1ACCFC952AC4CD5D00AC3E64 /* Preview Assets.xcassets in Resources */,
+				1ACCFC912AC4CD5D00AC3E64 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1ACCFC852AC4CD5B00AC3E64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1ACCFC8F2AC4CD5B00AC3E64 /* Parallax.swift in Sources */,
+				1ACCFC9C2AC4CDBE00AC3E64 /* LikeALaunchScreen.swift in Sources */,
+				1ACCFC8D2AC4CD5B00AC3E64 /* Animations_Workshop_vol_2App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1ACCFC962AC4CD5D00AC3E64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1ACCFC972AC4CD5D00AC3E64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		1ACCFC992AC4CD5D00AC3E64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Animations_Workshop vol.2/Animations_Workshop_vol_2.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Animations_Workshop vol.2/Preview Content\"";
+				DEVELOPMENT_TEAM = D3R4YN3V64;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Animations-Workshop-vol-2-Info.plist";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "taliagonzalez.Animations-Workshop-vol-2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1ACCFC9A2AC4CD5D00AC3E64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Animations_Workshop vol.2/Animations_Workshop_vol_2.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Animations_Workshop vol.2/Preview Content\"";
+				DEVELOPMENT_TEAM = D3R4YN3V64;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Animations-Workshop-vol-2-Info.plist";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "taliagonzalez.Animations-Workshop-vol-2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1ACCFC842AC4CD5B00AC3E64 /* Build configuration list for PBXProject "Animations_Workshop vol.2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1ACCFC962AC4CD5D00AC3E64 /* Debug */,
+				1ACCFC972AC4CD5D00AC3E64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1ACCFC982AC4CD5D00AC3E64 /* Build configuration list for PBXNativeTarget "Animations_Workshop vol.2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1ACCFC992AC4CD5D00AC3E64 /* Debug */,
+				1ACCFC9A2AC4CD5D00AC3E64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1ACCFC812AC4CD5B00AC3E64 /* Project object */;
+}

@@ -35,7 +35,7 @@ struct Parallax: View {
                     }
                     .cornerRadius(20.0)
                     .padding(.horizontal)
-                    .scrollTransition { effect, phase in
+                    .scrollTransition(.animated(.bouncy)) { effect, phase in
                         effect
                             .scaleEffect(phase.isIdentity ? 1 : 0.8)
                             .offset(x: offset(for: phase))

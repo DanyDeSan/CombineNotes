@@ -11,6 +11,7 @@ struct LikeALaunchScreen: View {
     @State private var size = 1.5
     @State private var opacity = 0.8
     
+    
     var body: some View {
         if isActive {
             Parallax()
@@ -20,7 +21,7 @@ struct LikeALaunchScreen: View {
                     Text("🛼")
                         .font(.system(size: 110.0))
                     Text("Arepa")
-                        .font(.system(size: 40.0))
+                        .font(.custom("Mooli-Regular", size: 40.0))
                 }
                 .scaleEffect(size)
                 .opacity(opacity)
